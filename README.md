@@ -1,6 +1,6 @@
 # Commonword
 
-A client-side vanilla JavaScript clue game where one player gives a common-word
+this is a client-side vanilla JavaScript clue game where one player gives a common-word
 clue that links multiple emojis and the other player guesses from a hidden board.
 
 ## Play

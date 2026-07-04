@@ -8,55 +8,19 @@
   </head>
   <body>
     <main class="app">
-      <section class="hero" aria-labelledby="game-title">
-        <div>
-          <p class="eyebrow">Two-player clue game</p>
-          <h1 id="game-title">Commonword</h1>
-          <p class="intro">
-            Give a clue that links multiple emojis. Reveal the hidden scores while
-            clue-giving, then hide them and let the guesser choose.
-          </p>
-        </div>
-        <div class="score-card" aria-live="polite">
-          <span class="score-label">Score</span>
-          <strong id="score">0</strong>
-          <span id="remainingTargets">12 scoring emojis left</span>
-        </div>
-      </section>
+      <h1 id="game-title">Commonword</h1>
 
       <section class="controls" aria-label="Game controls">
-        <button id="revealToggle" class="primary" type="button" aria-pressed="false">
-          Reveal scores
+        <button id="revealToggle" class="primary icon-button" type="button" aria-pressed="false" aria-label="Show scoring cards">
+          👁
         </button>
-        <button id="newGame" type="button">New board</button>
-        <form id="clueForm" class="clue-form" autocomplete="off">
-          <label>
-            Clue
-            <input id="clueWord" name="clueWord" type="text" maxlength="28" placeholder="e.g. summer">
-          </label>
-          <label>
-            Picks
-            <input id="clueCount" name="clueCount" type="number" min="1" max="12" placeholder="3">
-          </label>
-          <button type="submit">Set clue</button>
-        </form>
+        <button id="newGame" type="button">New</button>
+        <span class="toolbar-score" aria-live="polite">Score <strong id="score">0</strong></span>
       </section>
-
-      <p id="activeClue" class="active-clue" aria-live="polite">
-        Reveal scores to plan a clue.
-      </p>
 
       <section class="board-wrap" aria-label="Emoji board">
         <div id="board" class="board"></div>
       </section>
-
-      <section class="legend" aria-label="Score legend">
-        <div><span class="legend-dot one"></span> 1 point</div>
-        <div><span class="legend-dot zero"></span> 0 points</div>
-        <div><span class="legend-dot danger"></span> Instant game over</div>
-      </section>
-
-      <p id="message" class="message" aria-live="assertive"></p>
     </main>
 
     <script src="script.js"></script>

@@ -1,7 +1,6 @@
 # Commonword
 
-this is a client-side vanilla JavaScript clue game where one player gives a common-word
-clue that links multiple emojis and the other player guesses from a hidden board.
+This is a client-side vanilla JavaScript emoji guessing game.
 
 ## Play
 
@@ -10,12 +9,12 @@ required.
 
 ## Rules
 
-- A random 5x5 emoji board is generated for each new game.
+- A random 3x7 emoji board is generated for each new game.
 - One emoji is assigned as instant game over.
 - Half of the remaining emojis are worth 1 point each.
 - The rest are worth 0 points.
-- The clue giver can toggle **Reveal scores** to see the hidden point values.
-- After making a clue, hide the scores and let the guesser pick emojis.
-- Picked emojis stay bordered and keep their values revealed.
+- Use the eye button to show or hide the scoring emojis.
+- Scoring emojis are highlighted yellow when shown.
+- Picked emojis stay bordered and keep their score state revealed.
 - Picking a 1-point emoji increases the score.
 - Picking the instant game-over emoji ends the game and reveals the board.

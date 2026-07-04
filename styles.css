@@ -1,0 +1,350 @@
+:root {
+  color-scheme: light;
+  --bg: #f7efe4;
+  --panel: #fffaf2;
+  --ink: #261d17;
+  --muted: #76685d;
+  --line: #e1cdb7;
+  --accent: #245f73;
+  --accent-strong: #123f51;
+  --one: #f7d060;
+  --zero: #b8c7d9;
+  --danger: #d64f45;
+  --selected: #3b82f6;
+  --shadow: 0 18px 45px rgba(58, 42, 28, 0.14);
+}
+
+* {
+  box-sizing: border-box;
+}
+
+body {
+  min-height: 100vh;
+  margin: 0;
+  font-family:
+    Inter, ui-sans-serif, system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI",
+    sans-serif;
+  color: var(--ink);
+  background:
+    radial-gradient(circle at top left, rgba(245, 169, 98, 0.32), transparent 32rem),
+    linear-gradient(135deg, #f7efe4 0%, #e9f1ef 100%);
+}
+
+button,
+input {
+  font: inherit;
+}
+
+button {
+  border: 1px solid var(--line);
+  border-radius: 999px;
+  padding: 0.8rem 1rem;
+  color: var(--ink);
+  background: #ffffff;
+  cursor: pointer;
+  transition:
+    transform 160ms ease,
+    box-shadow 160ms ease,
+    border-color 160ms ease;
+}
+
+button:hover:not(:disabled) {
+  transform: translateY(-1px);
+  box-shadow: 0 8px 20px rgba(18, 63, 81, 0.12);
+}
+
+button:focus-visible,
+input:focus-visible {
+  outline: 3px solid rgba(36, 95, 115, 0.32);
+  outline-offset: 3px;
+}
+
+button:disabled {
+  cursor: not-allowed;
+  opacity: 0.6;
+}
+
+.app {
+  width: min(1100px, calc(100% - 2rem));
+  margin: 0 auto;
+  padding: 2rem 0 3rem;
+}
+
+.hero,
+.controls,
+.legend {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 1rem;
+}
+
+.hero {
+  margin-bottom: 1.25rem;
+}
+
+.eyebrow {
+  margin: 0 0 0.45rem;
+  color: var(--accent);
+  font-size: 0.78rem;
+  font-weight: 800;
+  letter-spacing: 0.14em;
+  text-transform: uppercase;
+}
+
+h1 {
+  margin: 0;
+  font-size: clamp(2.4rem, 8vw, 5.2rem);
+  line-height: 0.9;
+  letter-spacing: -0.08em;
+}
+
+.intro {
+  max-width: 40rem;
+  margin: 1rem 0 0;
+  color: var(--muted);
+  font-size: 1.05rem;
+  line-height: 1.55;
+}
+
+.score-card {
+  min-width: 11rem;
+  padding: 1.1rem;
+  border: 1px solid var(--line);
+  border-radius: 1.5rem;
+  text-align: center;
+  background: rgba(255, 250, 242, 0.84);
+  box-shadow: var(--shadow);
+}
+
+.score-label {
+  display: block;
+  color: var(--muted);
+  font-size: 0.75rem;
+  font-weight: 800;
+  letter-spacing: 0.14em;
+  text-transform: uppercase;
+}
+
+#score {
+  display: block;
+  margin: 0.1rem 0;
+  font-size: 3.4rem;
+  line-height: 1;
+}
+
+#remainingTargets {
+  color: var(--muted);
+  font-size: 0.92rem;
+}
+
+.controls {
+  flex-wrap: wrap;
+  padding: 1rem;
+  border: 1px solid rgba(225, 205, 183, 0.72);
+  border-radius: 1.5rem;
+  background: rgba(255, 250, 242, 0.72);
+  backdrop-filter: blur(10px);
+}
+
+.primary {
+  border-color: var(--accent);
+  color: #ffffff;
+  background: var(--accent);
+}
+
+.primary[aria-pressed="true"] {
+  background: var(--accent-strong);
+}
+
+.clue-form {
+  display: flex;
+  flex: 1 1 26rem;
+  align-items: end;
+  justify-content: flex-end;
+  gap: 0.75rem;
+}
+
+.clue-form label {
+  display: grid;
+  gap: 0.35rem;
+  color: var(--muted);
+  font-size: 0.82rem;
+  font-weight: 700;
+}
+
+.clue-form input {
+  min-width: 0;
+  border: 1px solid var(--line);
+  border-radius: 0.9rem;
+  padding: 0.76rem 0.85rem;
+  color: var(--ink);
+  background: #ffffff;
+}
+
+#clueWord {
+  width: min(52vw, 16rem);
+}
+
+#clueCount {
+  width: 5.6rem;
+}
+
+.active-clue,
+.message {
+  min-height: 1.6rem;
+  margin: 1rem 0;
+  color: var(--accent-strong);
+  font-weight: 750;
+}
+
+.board-wrap {
+  padding: clamp(0.65rem, 2vw, 1.2rem);
+  border: 1px solid rgba(225, 205, 183, 0.9);
+  border-radius: 2rem;
+  background: rgba(255, 250, 242, 0.74);
+  box-shadow: var(--shadow);
+}
+
+.board {
+  display: grid;
+  grid-template-columns: repeat(5, minmax(3.6rem, 1fr));
+  gap: clamp(0.45rem, 1.4vw, 0.85rem);
+}
+
+.card {
+  position: relative;
+  display: grid;
+  place-items: center;
+  aspect-ratio: 1;
+  border: 3px solid transparent;
+  border-radius: clamp(1rem, 2vw, 1.4rem);
+  color: var(--ink);
+  background:
+    linear-gradient(#fffaf2, #fffaf2) padding-box,
+    linear-gradient(135deg, rgba(255, 255, 255, 0.8), rgba(225, 205, 183, 0.9)) border-box;
+  box-shadow: inset 0 -8px 18px rgba(58, 42, 28, 0.06);
+}
+
+.card.selected {
+  border-color: var(--selected);
+  box-shadow:
+    0 0 0 4px rgba(59, 130, 246, 0.18),
+    inset 0 -8px 18px rgba(58, 42, 28, 0.06);
+}
+
+.card.revealed.kind-one {
+  background:
+    linear-gradient(rgba(247, 208, 96, 0.92), rgba(247, 208, 96, 0.78)) padding-box,
+    linear-gradient(135deg, #c48f0d, #f7d060) border-box;
+}
+
+.card.revealed.kind-zero {
+  background:
+    linear-gradient(rgba(184, 199, 217, 0.92), rgba(184, 199, 217, 0.72)) padding-box,
+    linear-gradient(135deg, #7c8fa5, #d7e1ec) border-box;
+}
+
+.card.revealed.kind-danger {
+  color: #ffffff;
+  background:
+    linear-gradient(rgba(214, 79, 69, 0.98), rgba(174, 38, 38, 0.88)) padding-box,
+    linear-gradient(135deg, #8f1717, #f3a39e) border-box;
+}
+
+.emoji {
+  font-size: clamp(2rem, 6vw, 4.1rem);
+  line-height: 1;
+  filter: drop-shadow(0 5px 8px rgba(38, 29, 23, 0.12));
+}
+
+.value {
+  position: absolute;
+  right: 0.5rem;
+  bottom: 0.5rem;
+  display: none;
+  min-width: 2rem;
+  padding: 0.22rem 0.45rem;
+  border-radius: 999px;
+  font-size: 0.85rem;
+  font-weight: 900;
+  line-height: 1;
+  text-align: center;
+  background: rgba(255, 255, 255, 0.72);
+}
+
+.card.revealed .value {
+  display: inline-block;
+}
+
+.card.kind-danger .value {
+  color: #8f1717;
+}
+
+.legend {
+  justify-content: center;
+  flex-wrap: wrap;
+  margin-top: 1rem;
+  color: var(--muted);
+  font-size: 0.92rem;
+}
+
+.legend > div {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.42rem;
+}
+
+.legend-dot {
+  width: 0.9rem;
+  height: 0.9rem;
+  border-radius: 50%;
+}
+
+.legend-dot.one {
+  background: var(--one);
+}
+
+.legend-dot.zero {
+  background: var(--zero);
+}
+
+.legend-dot.danger {
+  background: var(--danger);
+}
+
+.message {
+  color: #8f1717;
+}
+
+@media (max-width: 760px) {
+  .hero {
+    align-items: stretch;
+    flex-direction: column;
+  }
+
+  .score-card {
+    text-align: left;
+  }
+
+  .controls,
+  .clue-form {
+    align-items: stretch;
+    flex-direction: column;
+  }
+
+  .clue-form {
+    justify-content: stretch;
+  }
+
+  .clue-form input,
+  #clueWord,
+  #clueCount,
+  .controls button {
+    width: 100%;
+  }
+
+  .board {
+    grid-template-columns: repeat(5, minmax(2.7rem, 1fr));
+  }
+}

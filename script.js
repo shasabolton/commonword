@@ -1,8 +1,8 @@
 "use strict";
 
 (() => {
-  const BOARD_SIZE = 21;
-  const SCORING_CARD_COUNT = 10;
+  const BOARD_SIZE = 15;
+  const SCORING_CARD_COUNT = 7;
 
   const EMOJI_BANK = [
     { symbol: "🌞", name: "sun" },

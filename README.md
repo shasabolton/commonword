@@ -9,7 +9,7 @@ required.
 
 ## Rules
 
-- A random 3x7 emoji board is generated for each new game.
+- A random 3x5 emoji board is generated for each new game.
 - One emoji is assigned as instant game over.
 - Half of the remaining emojis are worth 1 point each.
 - The rest are worth 0 points.

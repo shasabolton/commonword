@@ -1,8 +1,8 @@
 "use strict";
 
 (() => {
-  const BOARD_SIZE = 25;
-  const SCORING_CARD_COUNT = 12;
+  const BOARD_SIZE = 21;
+  const SCORING_CARD_COUNT = 10;
 
   const EMOJI_BANK = [
     { symbol: "🌞", name: "sun" },
@@ -80,13 +80,7 @@
   const boardElement = document.querySelector("#board");
   const revealToggle = document.querySelector("#revealToggle");
   const newGameButton = document.querySelector("#newGame");
-  const clueForm = document.querySelector("#clueForm");
-  const clueWordInput = document.querySelector("#clueWord");
-  const clueCountInput = document.querySelector("#clueCount");
-  const activeClue = document.querySelector("#activeClue");
   const scoreElement = document.querySelector("#score");
-  const remainingTargets = document.querySelector("#remainingTargets");
-  const message = document.querySelector("#message");
 
   let cards = [];
   let score = 0;
@@ -134,10 +128,6 @@
     return `${card.points} point${card.points === 1 ? "" : "s"}`;
   }
 
-  function valueBadge(card) {
-    return card.kind === "danger" ? "KO" : String(card.points);
-  }
-
   function isVisible(card) {
     return scoresRevealed || card.selected || gameOver;
   }
@@ -170,11 +160,7 @@
         emoji.className = "emoji";
         emoji.textContent = card.symbol;
 
-        const value = document.createElement("span");
-        value.className = "value";
-        value.textContent = valueBadge(card);
-
-        button.append(emoji, value);
+        button.append(emoji);
         return button;
       }),
     );
@@ -183,18 +169,16 @@
   function setRevealState(nextState) {
     scoresRevealed = nextState;
     revealToggle.setAttribute("aria-pressed", String(scoresRevealed));
-    revealToggle.textContent = scoresRevealed ? "Hide scores" : "Reveal scores";
+    revealToggle.setAttribute(
+      "aria-label",
+      scoresRevealed ? "Hide scoring cards" : "Show scoring cards",
+    );
+    revealToggle.textContent = "👁";
     renderBoard();
   }
 
   function updateScoreSummary() {
-    const remaining = cards.filter((card) => card.kind === "one" && !card.selected).length;
     scoreElement.textContent = String(score);
-    remainingTargets.textContent = `${remaining} scoring emoji${remaining === 1 ? "" : "s"} left`;
-  }
-
-  function setMessage(text) {
-    message.textContent = text;
   }
 
   function selectCard(index) {
@@ -209,24 +193,12 @@
     if (card.kind === "danger") {
       gameOver = true;
       setRevealState(true);
-      setMessage(`Oh no - ${card.symbol} was instant game over.`);
     } else {
       score += card.points;
-      setMessage(
-        card.points === 1
-          ? `${card.symbol} scored 1 point. Keep guessing or stop the turn.`
-          : `${card.symbol} was safe, but scored 0 points.`,
-      );
       renderBoard();
     }
 
     updateScoreSummary();
-  }
-
-  function resetClue() {
-    clueWordInput.value = "";
-    clueCountInput.value = "";
-    activeClue.textContent = "Reveal scores to plan a clue.";
   }
 
   function startNewGame() {
@@ -234,9 +206,7 @@
     score = 0;
     gameOver = false;
     setRevealState(false);
-    resetClue();
     updateScoreSummary();
-    setMessage("");
   }
 
   revealToggle.addEventListener("click", () => {
@@ -245,31 +215,9 @@
     }
 
     setRevealState(!scoresRevealed);
-    setMessage(
-      scoresRevealed
-        ? "Clue giver view: make a common-word clue from the scoring emojis."
-        : "Guesser view: scores are hidden except for already selected emojis.",
-    );
   });
 
   newGameButton.addEventListener("click", startNewGame);
-
-  clueForm.addEventListener("submit", (event) => {
-    event.preventDefault();
-
-    const clue = clueWordInput.value.trim();
-    const count = Number(clueCountInput.value);
-
-    if (!clue) {
-      activeClue.textContent = "Add a clue word before handing the board to the guesser.";
-      return;
-    }
-
-    activeClue.textContent =
-      Number.isInteger(count) && count > 0
-        ? `Current clue: "${clue}" for ${count} pick${count === 1 ? "" : "s"}.`
-        : `Current clue: "${clue}".`;
-  });
 
   startNewGame();
 
